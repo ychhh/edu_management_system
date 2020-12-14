@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ychhh.edu_management_system.dao.SysRoleAclDao">
+  <resultMap id="BaseResultMap" type="com.ychhh.edu_management_system.entity.SysRoleAcl">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="targer_id" jdbcType="BIGINT" property="targerId" />
+    <result column="old_value" jdbcType="VARCHAR" property="oldValue" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="new_value" jdbcType="VARCHAR" property="newValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, targer_id, old_value, seq, remark, parent_id, `operator`, operate_time, operate_ip, 
+    `status`, `type`, new_value
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_acl_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_acl_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ychhh.edu_management_system.entity.SysRoleAcl" useGeneratedKeys="true">
+    insert into sys_acl_log (targer_id, old_value, seq, 
+      remark, parent_id, `operator`, 
+      operate_time, operate_ip, `status`, 
+      `type`, new_value)
+    values (#{targerId,jdbcType=BIGINT}, #{oldValue,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{operator,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{type,jdbcType=TINYINT}, #{newValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ychhh.edu_management_system.entity.SysRoleAcl" useGeneratedKeys="true">
+    insert into sys_acl_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="targerId != null">
+        targer_id,
+      </if>
+      <if test="oldValue != null">
+        old_value,
+      </if>
+      <if test="seq != null">
+        seq,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="operator != null">
+        `operator`,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operateIp != null">
+        operate_ip,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="newValue != null">
+        new_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="targerId != null">
+        #{targerId,jdbcType=BIGINT},
+      </if>
+      <if test="oldValue != null">
+        #{oldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="newValue != null">
+        #{newValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ychhh.edu_management_system.entity.SysRoleAcl">
+    update sys_acl_log
+    <set>
+      <if test="targerId != null">
+        targer_id = #{targerId,jdbcType=BIGINT},
+      </if>
+      <if test="oldValue != null">
+        old_value = #{oldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="operator != null">
+        `operator` = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="newValue != null">
+        new_value = #{newValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ychhh.edu_management_system.entity.SysRoleAcl">
+    update sys_acl_log
+    set targer_id = #{targerId,jdbcType=BIGINT},
+      old_value = #{oldValue,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      `operator` = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      `type` = #{type,jdbcType=TINYINT},
+      new_value = #{newValue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

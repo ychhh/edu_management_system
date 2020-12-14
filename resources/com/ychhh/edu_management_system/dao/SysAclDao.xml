@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ychhh.edu_management_system.dao.SysAclDao">
+  <resultMap id="BaseResultMap" type="com.ychhh.edu_management_system.entity.SysAcl">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="code" jdbcType="INTEGER" property="code" />
+    <result column="acl_moudle_id" jdbcType="BIGINT" property="aclMoudleId" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `name`, `level`, seq, remark, parent_id, `operator`, operate_time, operate_ip, 
+    `status`, code, acl_moudle_id, url, `type`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_acl
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_acl
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ychhh.edu_management_system.entity.SysAcl" useGeneratedKeys="true">
+    insert into sys_acl (`name`, `level`, seq, 
+      remark, parent_id, `operator`, 
+      operate_time, operate_ip, `status`, 
+      code, acl_moudle_id, url, 
+      `type`)
+    values (#{name,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{operator,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{code,jdbcType=INTEGER}, #{aclMoudleId,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ychhh.edu_management_system.entity.SysAcl" useGeneratedKeys="true">
+    insert into sys_acl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="level != null">
+        `level`,
+      </if>
+      <if test="seq != null">
+        seq,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="operator != null">
+        `operator`,
+      </if>
+      <if test="operateTime != null">
+        operate_time,
+      </if>
+      <if test="operateIp != null">
+        operate_ip,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="aclMoudleId != null">
+        acl_moudle_id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        #{operateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=INTEGER},
+      </if>
+      <if test="aclMoudleId != null">
+        #{aclMoudleId,jdbcType=BIGINT},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ychhh.edu_management_system.entity.SysAcl">
+    update sys_acl
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        `level` = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="operator != null">
+        `operator` = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null">
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operateIp != null">
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=INTEGER},
+      </if>
+      <if test="aclMoudleId != null">
+        acl_moudle_id = #{aclMoudleId,jdbcType=BIGINT},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ychhh.edu_management_system.entity.SysAcl">
+    update sys_acl
+    set `name` = #{name,jdbcType=VARCHAR},
+      `level` = #{level,jdbcType=VARCHAR},
+      seq = #{seq,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      `operator` = #{operator,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      operate_ip = #{operateIp,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      code = #{code,jdbcType=INTEGER},
+      acl_moudle_id = #{aclMoudleId,jdbcType=BIGINT},
+      url = #{url,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
