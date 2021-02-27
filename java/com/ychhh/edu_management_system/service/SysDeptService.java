@@ -12,6 +12,8 @@ public interface SysDeptService {
 
     SysDeptDTO getTree();
 
+    List<SysDept> selectAll();
+
     int deleteByPrimaryKey(Long id);
 
     int insert(SysDeptVO sysDeptVO, HttpServletRequest request) throws ResponseException;

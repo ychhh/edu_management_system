@@ -6,6 +6,11 @@ public class ResponseException extends RuntimeException {
         this.code = code;
         this.reason = reason;
     }
+    public ResponseException(String msg) {
+        super(msg);
+        this.code = 400;
+        this.reason = msg;
+    }
 
     public ResponseException(int code, String reason, Throwable cause) {
         super(reason, cause);

@@ -17,5 +17,7 @@ public class Course implements Serializable {
 
     private Integer status;
 
+    private Long creater;
+
     private static final long serialVersionUID = 1L;
 }

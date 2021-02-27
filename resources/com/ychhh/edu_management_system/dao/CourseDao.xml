@@ -6,9 +6,10 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="creater" jdbcType="BIGINT" property="creater" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, `name`, `type`, `status`
+    id, `name`, `type`, `status`, creater
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -21,10 +22,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ychhh.edu_management_system.entity.Course" useGeneratedKeys="true">
-    insert into course (`name`, `type`, `status`
-      )
-    values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
-      )
+    insert into course (`name`, `type`, `status`, 
+      creater)
+    values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{creater,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ychhh.edu_management_system.entity.Course" useGeneratedKeys="true">
     insert into course
@@ -38,6 +39,9 @@
       <if test="status != null">
         `status`,
       </if>
+      <if test="creater != null">
+        creater,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -48,6 +52,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -63,6 +70,9 @@
       <if test="status != null">
         `status` = #{status,jdbcType=INTEGER},
       </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -70,7 +80,17 @@
     update course
     set `name` = #{name,jdbcType=VARCHAR},
       `type` = #{type,jdbcType=INTEGER},
-      `status` = #{status,jdbcType=INTEGER}
+      `status` = #{status,jdbcType=INTEGER},
+      creater = #{creater,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <select id="selectByStatus" resultType="com.ychhh.edu_management_system.entity.Course">
+        select
+        <include refid="Base_Column_List" />
+        from course
+        where status = #{status,jdbcType=INTEGER}
+        <if test="creater != null">
+           and creater = #{creater,jdbcType=BIGINT}
+        </if>
+    </select>
 </mapper>

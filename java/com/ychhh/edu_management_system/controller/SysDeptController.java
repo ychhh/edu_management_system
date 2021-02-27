@@ -7,8 +7,11 @@ import com.ychhh.edu_management_system.service.SysDeptService;
 import com.ychhh.edu_management_system.utils.ResponseException;
 import com.ychhh.edu_management_system.utils.ResponseMessage;
 import com.ychhh.edu_management_system.vo.SysDeptVO;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -18,19 +21,29 @@ import java.util.List;
 public class SysDeptController {
     @Autowired
     SysDeptService sysDeptService;
+    @RequestMapping("/dept")
+    public ModelAndView page() {
+        return new ModelAndView("dept");
+    }
 
-    @GetMapping("/select/{id}")
+    @GetMapping("/select")
     public ResponseMessage select(@PathVariable("id") Long id){
         SysDept sysDept =sysDeptService.selectByPrimaryKey(id);
         return ResponseMessage.success(sysDept);
     }
+    @GetMapping("/selectAll")
+    public ResponseMessage selectAll(){
+        List<SysDept> list =sysDeptService.selectAll();
+        return ResponseMessage.success(list);
+    }
+    @ApiOperation("获取部门树")
     @GetMapping("/gettree")
     public ResponseMessage getTree(){
         SysDeptDTO sysDeptDTO =sysDeptService.getTree();
         return ResponseMessage.success(sysDeptDTO);
     }
-    @GetMapping("/delete/{id}")
-    public ResponseMessage delete(@PathVariable("id") Long id){
+    @GetMapping("/delete")
+    public ResponseMessage delete(Long id){
         sysDeptService.deleteByPrimaryKey(id);
         return ResponseMessage.success();
     }

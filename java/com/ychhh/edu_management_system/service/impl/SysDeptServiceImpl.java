@@ -40,6 +40,11 @@ public class SysDeptServiceImpl implements SysDeptService {
         return generateTree(sysDeptDTOs,root);
     }
 
+    @Override
+    public List<SysDept> selectAll() {
+        return sysDeptDao.selectAll();
+    }
+
     public SysDeptDTO generateTree(List<SysDeptDTO> sysDeptDTOs,SysDeptDTO root){
         List<SysDeptDTO> sysDeptDTOList= sysDeptDTOs.stream().filter(item -> item.getParentId().equals(root.getId())).collect(Collectors.toList());
         root.setList(sysDeptDTOList);

@@ -3,17 +3,21 @@ package com.ychhh.edu_management_system.dao;
 import com.ychhh.edu_management_system.entity.Course;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface CourseDao {
     int deleteByPrimaryKey(Long id);
 
-    int insert(Course record);
+    int insert(Course course);
 
-    int insertSelective(Course record);
+    int insertSelective(Course course);
 
     Course selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Course record);
+    List<Course> selectByStatus(Long creater,Integer status);
 
-    int updateByPrimaryKey(Course record);
+    int updateByPrimaryKeySelective(Course course);
+
+    int updateByPrimaryKey(Course course);
 }
